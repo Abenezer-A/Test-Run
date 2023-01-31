@@ -69,14 +69,15 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
-          name: Back-end build
+          name: Build back-end
           command: |
             cd backend
             npm install
             npm run build
       - save_cache:
           paths: [backend/node_modules]
-          keys: backend-build
+          key: backend-build
+  
   test-frontend:
     docker:
       - image: circleci/node:13.8.0
