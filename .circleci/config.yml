@@ -77,7 +77,6 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
-  
   test-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -119,7 +118,6 @@ jobs:
              npm install
              npm audit fix --audit-level=critical --force
              
-
   scan-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -145,17 +143,16 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/backend.yml \
-              --tags project=udapeopleC \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
-              
+              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
+              --tags project=udapeopleA
               
       - run:
           name: Ensure front-end infrastructure exist
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/frontend.yml \
-              --tags project="udapeopleF" \
+              --tags project="udapeopleB" \
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
       - run:
@@ -170,9 +167,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
       # - destroy-environment
-      # - destroy-environment:
-      #     workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
-      # Here's where you will add some code to rollback on failure      
+         
 
   configure-infrastructure:
     docker:
