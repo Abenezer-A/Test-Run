@@ -28,7 +28,7 @@ commands:
           name: Revert migrations
           when: on_fail
           command: |
-            SUCCESS=$(curl --insecure https://kvdb.io/C1YctgzF5emLBuwTgnuPnL/migration_<< parameters.workflow_id >>)
+            SUCCESS=$(curl --insecure https://kvdb.io/6By9DMkYwZw7ckDn1FpGA8/migration_<< parameters.workflow_id >>)
             if (( $SUCCESS == 1 )); 
             then
               cd ~/project/backend
@@ -176,7 +176,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - '95:a8:b3:d1:ea:d6:b9:d4:98:a2:e4:a9:1e:e7:c0:32'
+            - 'cc:8c:d4:5d:ab:66:b6:4f:5d:9f:53:ad:83:3d:32:3e'
       - attach_workspace:
           at: ~/
       - run:
@@ -227,7 +227,7 @@ jobs:
           command: |
             if grep -q "executed successfully" ~/project/backend/migrations_dump.txt
             then
-              curl --insecure https://kvdb.io/C1YctgzF5emLBuwTgnuPnL/migration_$\{CIRCLE_WORKFLOW_ID:0:7\} -d '1'
+              curl --insecure https://kvdb.io/6By9DMkYwZw7ckDn1FpGA8/migration_$\{CIRCLE_WORKFLOW_ID:0:7\} -d '1'
             fi
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
@@ -281,7 +281,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - '95:a8:b3:d1:ea:d6:b9:d4:98:a2:e4:a9:1e:e7:c0:32'
+            - 'cc:8c:d4:5d:ab:66:b6:4f:5d:9f:53:ad:83:3d:32:3e'
       - attach_workspace:
           at: ~/
       - run:
@@ -410,7 +410,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - '95:a8:b3:d1:ea:d6:b9:d4:98:a2:e4:a9:1e:e7:c0:32'
+            - 'cc:8c:d4:5d:ab:66:b6:4f:5d:9f:53:ad:83:3d:32:3e'
       - run:
           name: Install dependencies
           command: |
