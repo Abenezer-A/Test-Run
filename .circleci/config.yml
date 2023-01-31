@@ -69,7 +69,7 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
-          name: Build back-end
+          name: Back-end build
           command: |
             cd backend
             npm install
@@ -111,7 +111,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-           keys: [frontend-build]
+           key: build front-end
       - run:
            name: scan
            command: |
@@ -126,7 +126,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build]
+          key: build back-end
       - run:
           name: scan
           command: |
@@ -145,7 +145,7 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/backend.yml \
-              --tags project=udapeopleB \
+              --tags project=udapeopleC \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
               
